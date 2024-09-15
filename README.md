@@ -103,3 +103,13 @@ Authentication e o Firebase Storage:
 1. Clone o repositório do projeto:
    ```bash
    git clone https://github.com/seu-usuario/innov8tech.git
+
+---------------------------------------------------------------------
+                          MEMBROS
+---------------------------------------------------------------------
+
+- **Lucas Serbato de Barros - 551821**
+- **Ronald de Oliveira Farias - 552364**
+- **Vitor Teixeira - RM 552228**
+- **Phablo Isaias Silva Santos - RM550687**
+- **Gustavo Carvalho - RM 552466**
