@@ -24,7 +24,22 @@
         android:id="@+id/navigation_dashboard"
         android:name="br.com.fiap.innov8tech.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_reportDetailsFragment"
+            app:destination="@id/reportDetailsFragment">
+            <argument
+                android:name="twitterHandle"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/reportDetailsFragment"
+        android:name="br.com.fiap.innov8tech.ui.dashboard.ReportDetailsFragment"
+        android:label="Detalhes do Relatório"
+        tools:layout="@layout/fragment_report_details" />
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -40,17 +55,28 @@
         <action
             android:id="@+id/action_login_to_forgotpass"
             app:destination="@id/forgotPassFragment" />
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="br.com.fiap.innov8tech.ui.register.RegisterFragment"
         android:label="Register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/forgotPassFragment"
         android:name="br.com.fiap.innov8tech.ui.forgotpass.ForgotPassFragment"
         android:label="Recuperar Senha"
         tools:layout="@layout/fragment_forgot_pass" />
+
 </navigation>

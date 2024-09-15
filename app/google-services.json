@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054025488701",
+    "project_id": "sprint3-mobile",
+    "storage_bucket": "sprint3-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054025488701:android:4d44b71a23307b88064d54",
+        "android_client_info": {
+          "package_name": "br.com.fiap.innov8tech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH7TGV2r23RbadZEqR_7OV7i0pXMsQH-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
