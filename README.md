@@ -2,12 +2,12 @@
                           Innov8Tech - Mobile App
 =====================================================================
 
-Projeto **Innov8Tech**, 
-desenvolvido para realizar a análise de perfis no Bluesky. Os usuários 
-podem solicitar relatórios sobre perfis do Bluesky, onde são gerados 
-dados de análise sobre a conta inserida. O app inclui funcionalidades 
-de cadastro, login, recuperação de senha, solicitação de relatórios e 
-uma interface de dashboard onde os relatórios são exibidos.
+Projeto **Innov8Tech**, desenvolvido para realizar a análise de perfis 
+no Bluesky. Os usuários podem solicitar relatórios sobre perfis do 
+Bluesky, onde são gerados dados de análise sobre a conta inserida. 
+O app inclui funcionalidades de cadastro, login, recuperação de senha, 
+solicitação de relatórios e uma interface de dashboard onde os relatórios 
+são exibidos.
 
 ---------------------------------------------------------------------
                           FUNCIONALIDADES
