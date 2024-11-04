@@ -26,34 +26,28 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun loadExistingReports() {
-        // Limpa a lista antes de carregar novos dados
         _reports.value = emptyList()
-        forceNotifyLiveData() // Força notificação da limpeza
+        forceNotifyLiveData()
 
         val userReportsRef = getUserReportsReference() ?: return
         Log.d("DashboardViewModel", "Iniciando carregamento de relatórios.")
 
         userReportsRef.get().addOnSuccessListener { snapshot ->
             val reportsList = mutableListOf<Report>()
-            snapshot.children.forEach { reportSnapshot ->
+            for (reportSnapshot in snapshot.children) {
                 val report = reportSnapshot.getValue(Report::class.java)
                 report?.let {
                     Log.d("DashboardViewModel", "Processando relatório: ${it.fileName}")
                     reportsList.add(it)
                 }
             }
-            // Atualiza _reports com uma nova lista
             _reports.value = reportsList.toList()
             Log.d("DashboardViewModel", "Total de relatórios carregados: ${reportsList.size}")
-            forceNotifyLiveData() // Força notificação após a atualização
+            forceNotifyLiveData()
         }.addOnFailureListener { exception ->
             Log.e("DashboardViewModel", "Erro ao carregar relatórios: ${exception.message}")
         }
     }
-
-
-
-
 
     fun requestNewReport(twitterHandle: String) {
         val reportId = UUID.randomUUID().toString()
@@ -63,10 +57,8 @@ class DashboardViewModel : ViewModel() {
         val newReport = Report(reportId, twitterHandle, "Em processamento", dateCreated, fileName)
         _reports.value = _reports.value?.plus(newReport) ?: listOf(newReport)
 
-        loadExistingReports()
         saveReportToRealtimeDatabase(reportId, newReport)
     }
-
 
     private fun saveReportToRealtimeDatabase(reportId: String, report: Report) {
         val userReportsRef = getUserReportsReference()?.child(reportId) ?: return
@@ -114,7 +106,6 @@ class DashboardViewModel : ViewModel() {
             }
         }
     }
-
 
     fun getCurrentUser() = firebaseAuth.currentUser
 }

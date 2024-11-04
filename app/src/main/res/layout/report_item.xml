@@ -43,7 +43,10 @@
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Deletar"
+        android:src="@android:drawable/ic_menu_delete"
+        android:contentDescription="Deletar relatório"
+        app:layout_constraintTop_toBottomOf="@id/details_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
 
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>
