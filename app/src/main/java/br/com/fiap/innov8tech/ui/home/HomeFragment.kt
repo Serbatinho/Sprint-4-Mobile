@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.com.fiap.innov8tech.R
 import br.com.fiap.innov8tech.databinding.FragmentHomeBinding
+import br.com.fiap.innov8tech.ui.dashboard.DashboardViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
@@ -16,6 +18,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
+    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var authStateListener: FirebaseAuth.AuthStateListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +27,8 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
+
+        dashboardViewModel = ViewModelProvider(requireActivity()).get(DashboardViewModel::class.java)
 
         checkUserStatus()
 
@@ -37,6 +43,19 @@ class HomeFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             logoutUser()
         }
+
+        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            val currentUser = firebaseAuth.currentUser
+            if (currentUser != null) {
+                dashboardViewModel.reloadReports()
+                Toast.makeText(context, "Bem-vindo de volta!", Toast.LENGTH_SHORT).show()
+            } else {
+                dashboardViewModel.clearReports()
+            }
+            checkUserStatus()
+        }
+
+        auth.addAuthStateListener(authStateListener)
 
         return binding.root
     }
@@ -56,17 +75,14 @@ class HomeFragment : Fragment() {
 
     private fun logoutUser() {
         auth.signOut()
+        dashboardViewModel.clearReports()
         checkUserStatus()
         Toast.makeText(context, "Você saiu da conta", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onStart() {
-        super.onStart()
-        checkUserStatus()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
+        auth.removeAuthStateListener(authStateListener)
         _binding = null
     }
 }

@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.innov8tech.R
 
 data class Report(
-    val twitterHandle: String,
-    val status: String,
-    val dateCreated: String,
-    val fileName: String
+    val twitterHandle: String = "",
+    val status: String = "",
+    val dateCreated: String = "",
+    val fileName: String = "",
+    val fileUrl: String? = null
 )
 
 class ReportAdapter(
@@ -38,7 +39,6 @@ class ReportAdapter(
         holder.statusTextView.text = report.status
         holder.dateTextView.text = "Data de criação: ${report.dateCreated}"
 
-        // Ação do botão "Detalhes"
         holder.detailsButton.setOnClickListener {
             onDetailsClicked(report)
         }

@@ -34,6 +34,7 @@ class DashboardFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("twitterHandle", report.twitterHandle)
                 bundle.putString("reportContent", report.fileName)
+                bundle.putString("fileUrl", report.fileUrl)
                 findNavController().navigate(R.id.reportDetailsFragment, bundle)
             }
         )
@@ -66,7 +67,7 @@ class DashboardFragment : Fragment() {
             binding.newReportButton.visibility = View.VISIBLE
             binding.notLoggedInMessage.visibility = View.GONE
         } else {
-            dashboardViewModel.clearReports() // Limpar os relatórios se o usuário não estiver logado
+            dashboardViewModel.clearReports()
             binding.twitterHandleInput.visibility = View.GONE
             binding.newReportButton.visibility = View.GONE
             binding.notLoggedInMessage.visibility = View.VISIBLE

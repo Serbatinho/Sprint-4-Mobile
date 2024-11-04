@@ -51,10 +51,8 @@ class LoginFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Login bem-sucedido
                     findNavController().navigate(R.id.action_login_to_home)
                 } else {
-                    // Falha no login
                     Toast.makeText(context, "Falha no login: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
