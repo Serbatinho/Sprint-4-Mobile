@@ -48,11 +48,12 @@ class DashboardViewModel : ViewModel() {
         val fileName = "$twitterHandle-$reportId.txt"
         val dateCreated = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(Date())
 
-        val newReport = Report(twitterHandle, "Em processamento", dateCreated, fileName)
+        val newReport = Report(reportId, twitterHandle, "Em processamento", dateCreated, fileName)
         _reports.value = _reports.value?.plus(newReport) ?: listOf(newReport)
 
         saveReportToRealtimeDatabase(reportId, newReport)
     }
+
 
     private fun saveReportToRealtimeDatabase(reportId: String, report: Report) {
         val userReportsRef = getUserReportsReference()?.child(reportId) ?: return
@@ -85,6 +86,22 @@ class DashboardViewModel : ViewModel() {
     private fun forceNotifyLiveData() {
         _reports.value = _reports.value
     }
+
+    fun deleteReport(report: Report) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            val databaseRef = FirebaseDatabase.getInstance().reference.child("user_reports").child(userId).child(report.reportId)
+
+            databaseRef.removeValue().addOnSuccessListener {
+                _reports.value = _reports.value?.filterNot { it.reportId == report.reportId }
+                Log.d("DashboardViewModel", "Relatório deletado com sucesso do Firebase Realtime Database.")
+            }.addOnFailureListener { exception ->
+                Log.e("DashboardViewModel", "Erro ao deletar relatório: ${exception.message}")
+            }
+        }
+    }
+
 
     fun getCurrentUser() = firebaseAuth.currentUser
 }

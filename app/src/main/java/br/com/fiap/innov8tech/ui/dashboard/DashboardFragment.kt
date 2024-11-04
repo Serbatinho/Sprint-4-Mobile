@@ -36,8 +36,13 @@ class DashboardFragment : Fragment() {
                 bundle.putString("reportContent", report.fileName)
                 bundle.putString("fileUrl", report.fileUrl)
                 findNavController().navigate(R.id.reportDetailsFragment, bundle)
+            },
+            onDeleteClicked = { report ->
+                dashboardViewModel.deleteReport(report)
+                Toast.makeText(requireContext(), "Relatório de @${report.twitterHandle} excluído", Toast.LENGTH_SHORT).show()
             }
         )
+
         binding.reportList.layoutManager = LinearLayoutManager(requireContext())
         binding.reportList.adapter = reportAdapter
 
