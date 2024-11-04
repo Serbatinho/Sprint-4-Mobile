@@ -30,8 +30,6 @@ class HomeFragment : Fragment() {
 
         dashboardViewModel = ViewModelProvider(requireActivity()).get(DashboardViewModel::class.java)
 
-        checkUserStatus()
-
         binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_login)
         }
@@ -56,6 +54,8 @@ class HomeFragment : Fragment() {
         }
 
         auth.addAuthStateListener(authStateListener)
+
+        checkUserStatus()
 
         return binding.root
     }

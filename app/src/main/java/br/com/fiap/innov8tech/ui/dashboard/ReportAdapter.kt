@@ -1,5 +1,6 @@
 package br.com.fiap.innov8tech.ui.dashboard
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,7 @@ class ReportAdapter(
 
     fun updateReports(newReports: List<Report>) {
         reports = newReports
+        Log.d("ReportAdapter", "Total de relatórios para exibição: ${reports.size}")
         notifyDataSetChanged()
     }
 }

@@ -18,10 +18,8 @@ class ReportDetailsFragment : Fragment() {
     ): View? {
         _binding = FragmentReportDetailsBinding.inflate(inflater, container, false)
 
-        // Obtém o twitterHandle do bundle
         val twitterHandle = arguments?.getString("twitterHandle")
 
-        // Atualiza a UI com os dados do relatório
         binding.reportDetailsTextView.text = "Detalhes do relatório para @$twitterHandle:\nRelatório gerado automaticamente."
 
         return binding.root
